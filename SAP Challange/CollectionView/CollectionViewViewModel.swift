@@ -29,10 +29,10 @@ class CollectionViewViewModel {
     let nrOfCellsInRow = 3
     
     /// the space between cells
-    let cellPadding: CGFloat = 3
+    let cellPadding: CGFloat = 2
     
     /// the width of the collectionview. Is set at the initialization of the view model
-    private var collectionviewWidth: CGFloat
+    private var collectionviewWidth: CGFloat!
     
     /// the maximum width that a cell can have.
     private var maxCellWidth: CGFloat!
@@ -57,12 +57,7 @@ class CollectionViewViewModel {
     
     
     init(collectionView: UICollectionView){
-        self.collectionviewWidth = collectionView.frame.width
-        self.maxCellWidth = calculateMaxCellWidth()
-        
-        self.defaultCellSize = calculateDefaultCellSize()
-        self.datasource = createDataSource()
-        
+        updateCollectionviewWidth(collectionView.frame.width)
     }
     
     /// generates a dummy datasource
@@ -83,6 +78,9 @@ class CollectionViewViewModel {
     //MARK: - Layout
     func updateCollectionviewWidth(_ newWidth: CGFloat){
         collectionviewWidth = newWidth
+        self.maxCellWidth = calculateMaxCellWidth()
+        self.defaultCellSize = calculateDefaultCellSize()
+        datasource = createDataSource()
     }
     /// calculates and returns the initial size for cells. The size of the cells is maximized so that enough cells will fit in one row(nrOfCellsInRow).
     func calculateDefaultCellSize() -> CGSize{
@@ -114,6 +112,9 @@ class CollectionViewViewModel {
         var sizeForFocusedCell = size
         if sizeForFocusedCell.width > maxCellWidth{
             sizeForFocusedCell.width = maxCellWidth
+        }
+        if sizeForFocusedCell.width < minCellWidth{
+            sizeForFocusedCell.width = minCellWidth
         }
         
         
@@ -182,8 +183,10 @@ class CollectionViewViewModel {
         rowWidthSizes[focusedCellPosition] = sizeForFocusedCell.width
         
         
-//        print("total = \(collectionviewWidth)")
-//        print("\(rowWidthSizes[0]) + \(rowWidthSizes[1]) + \(rowWidthSizes[2]) + 20 = \(rowWidthSizes[0] + rowWidthSizes[1] + rowWidthSizes[2] + 20)")
+        print("total = \(collectionviewWidth!)")
+        print("minCell = \(minCellWidth)")
+        print("max = \(maxCellWidth!)")
+        print("\(rowWidthSizes[0]) + \(rowWidthSizes[1]) + \(rowWidthSizes[2]) + \((CGFloat(nrOfCellsInRow) + 1) * cellPadding)) = \(rowWidthSizes[0] + rowWidthSizes[1] + rowWidthSizes[2] + ((CGFloat(nrOfCellsInRow) + 1) * cellPadding))")
         
         // And finally we update every cell width in the datasource, using the sizes we defind in `rowWidthSizes`
         for index in 0 ... datasource.count - 1{

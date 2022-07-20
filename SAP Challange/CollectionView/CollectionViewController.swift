@@ -12,7 +12,7 @@ class CollectionViewController: UIViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
     
     /// the model for the viewcontroller
-    var viewModel: CollectionViewViewModel!
+    private var viewModel: CollectionViewViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +21,7 @@ class CollectionViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         viewModel.updateCollectionviewWidth(collectionView.frame.width)
-
+    
         setupCollectionView()
     }
     private func setupCollectionView(){
