@@ -16,7 +16,7 @@ class CollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = CollectionViewViewModel(collectionView: collectionView)
+        viewModel = CollectionViewViewModel(collectionViewWidth: collectionView.frame.width)
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

@@ -38,13 +38,13 @@ class CollectionViewViewModel {
     private var maxCellWidth: CGFloat!
     
     /// the minimum cell width.  Setting it lower then 50 can make cells harder to pinch, when they are at minimum size
-    private var minCellWidth: CGFloat = 50
+    private(set) var minCellWidth: CGFloat = 50
     
     /// the default cell size. The cells size is calculated so that enought cells(defined by "nrOfCellsInRow") fit horizontally on the collectionview
     private var defaultCellSize: CGSize!
     
     /// this is the size of the cell that the user is currently interacting(pinching) with
-    private var focusedCellSize: CGSize?
+    var focusedCellSize: CGSize?
     
     /// this is the ammount of scale applied on the width of the cell, while the user interacts with it
     private var horScale: CGFloat = 1
@@ -56,8 +56,8 @@ class CollectionViewViewModel {
     private var pinchType: GestureType!
     
     
-    init(collectionView: UICollectionView){
-        updateCollectionviewWidth(collectionView.frame.width)
+    init(collectionViewWidth: CGFloat){
+        updateCollectionviewWidth(collectionViewWidth)
     }
     
     /// generates a dummy datasource
@@ -98,7 +98,7 @@ class CollectionViewViewModel {
         return result
     }
     
-    
+    //MARK: - Resizing Cells
     /// this function will update the size for all cells in the data source.First it will set the size for the cell that the user interacted with, and then it will update the size for the rest of the cells so that they don't break the originalgrid layout
     ///
     ///  - Parameter indexPath: The indexpath of the cell that the user is interacting(pinch) with.
@@ -109,19 +109,13 @@ class CollectionViewViewModel {
         
         // First we make sure that the new size is valid
         let originalSizeForFocusedCell = datasource[indexPath.row].cellSize
-        var sizeForFocusedCell = size
-        if sizeForFocusedCell.width > maxCellWidth{
-            sizeForFocusedCell.width = maxCellWidth
-        }
-        if sizeForFocusedCell.width < minCellWidth{
-            sizeForFocusedCell.width = minCellWidth
-        }
+        let sizeForFocusedCell = validateFocusedCellSize(size)
         
         
         // Next we update the height for all cells that are on the same row with the cell that the user interacts with. We only need to update the height on this row according to the requrements (and example given)
         // We also define an array that holds the width of every cell in a row
         /// the array holds the width of every cell in one row. So at index 0 we have the width for the first cell, at index 1 the width of cell 2...etc
-        var rowWidthSizes = [CGFloat]()
+        var cellsWidthInARow = [CGFloat]()
         let rowStart = indexPath.row - focusedCellPosition
         var rowEnd = rowStart + nrOfCellsInRow - 1
         if rowEnd >= datasource.count {
@@ -130,7 +124,7 @@ class CollectionViewViewModel {
         for i in rowStart ... rowEnd{
             guard datasource.count >= i else {break}
             datasource[i].cellSize.height = sizeForFocusedCell.height
-            rowWidthSizes.append(datasource[i].cellSize.width)
+            cellsWidthInARow.append(datasource[i].cellSize.width)
         }
         
         // Next we find out by how much the cells width will change
@@ -144,12 +138,12 @@ class CollectionViewViewModel {
         // we start a while loop in which we add/subtract space to each item in `rowWidthSizes`.
         var idx = -1
         while totalSpace != 0 {
-            idx = (idx + 1 == rowWidthSizes.count) ? 0 : idx + 1
+            idx = (idx + 1 == cellsWidthInARow.count) ? 0 : idx + 1
             
             // we skip this item because it's the cell that the user pinched
             guard focusedCellPosition != idx else {continue}
             
-            let crtCellWidth = rowWidthSizes[idx]
+            let crtCellWidth = cellsWidthInARow[idx]
             // this is the maximum ammount of space that we need to add or subtract from this cell
             let changeAmmount = (abs(spacePerCellChange) > abs(totalSpace)) ? totalSpace : spacePerCellChange
             
@@ -158,14 +152,14 @@ class CollectionViewViewModel {
             
             if newWidth > maxCellWidth{
                 // looks like the cell will be bigger then the allowed size... we increase the size to maximum allowed
-                rowWidthSizes[idx] = maxCellWidth
+                cellsWidthInARow[idx] = maxCellWidth
                 // we remove from the total space the ammount of space we added to this cell
                 totalSpace -= maxCellWidth - crtCellWidth
                 continue
             }
             else if newWidth < minCellWidth{
                 // looks like the cell will be smaller then the allowed size... we decrease the size to maximum allowed
-                rowWidthSizes[idx] = minCellWidth
+                cellsWidthInARow[idx] = minCellWidth
                 // we remove from the total space the ammount of space we added to this cell
                 totalSpace -= minCellWidth - crtCellWidth
                 continue
@@ -173,100 +167,89 @@ class CollectionViewViewModel {
             else{
                 
                 totalSpace -= changeAmmount
-                rowWidthSizes[idx] = newWidth
+                cellsWidthInARow[idx] = newWidth
             }
             
             
         }
         
         // after the loop is done, we set the width for the cell that the user interacted with
-        rowWidthSizes[focusedCellPosition] = sizeForFocusedCell.width
+        cellsWidthInARow[focusedCellPosition] = sizeForFocusedCell.width
         
         
-        print("total = \(collectionviewWidth!)")
-        print("minCell = \(minCellWidth)")
-        print("max = \(maxCellWidth!)")
-        print("\(rowWidthSizes[0]) + \(rowWidthSizes[1]) + \(rowWidthSizes[2]) + \((CGFloat(nrOfCellsInRow) + 1) * cellPadding)) = \(rowWidthSizes[0] + rowWidthSizes[1] + rowWidthSizes[2] + ((CGFloat(nrOfCellsInRow) + 1) * cellPadding))")
+//        print("total = \(collectionviewWidth!)")
+//        print("minCell = \(minCellWidth)")
+//        print("max = \(maxCellWidth!)")
+//        print("\(rowWidthSizes[0]) + \(rowWidthSizes[1]) + \(rowWidthSizes[2]) + \((CGFloat(nrOfCellsInRow) + 1) * cellPadding)) = \(rowWidthSizes[0] + rowWidthSizes[1] + rowWidthSizes[2] + ((CGFloat(nrOfCellsInRow) + 1) * cellPadding))")
         
         // And finally we update every cell width in the datasource, using the sizes we defind in `rowWidthSizes`
         for index in 0 ... datasource.count - 1{
             let rowPosition = index % nrOfCellsInRow
-            datasource[index].cellSize.width = rowWidthSizes[rowPosition]
+            datasource[index].cellSize.width = cellsWidthInARow[rowPosition]
         }
         
+    }
+    func distributeTheRemainingSpaceBetweenAllCellsInRow(_ cellsWidthInARow: [CGFloat], spaceToDistribute: CGFloat) -> [CGFloat]{
+        /// this is the total space by which the user interacted cell is changed (increased or decreased)
+        var totalSpace = spaceToDistribute
+        var row = cellsWidthInARow
+        
+        /// this is the space by which each indivitual cell in a row needs to increase or decrease
+        let spacePerCellChange = totalSpace / ( CGFloat(nrOfCellsInRow) - 1)
+        
+        // Next we need to actually change the width for every cell in a row, so that we don't break the grid layout... Meaning, we actually need to change the rest of the cells width in the row, by the ammount of that whe changed that the user increased/decreased the cell.
+        // we start a while loop in which we add/subtract space to each item in `rowWidthSizes`.
+        var idx = -1
+        while totalSpace != 0 {
+            idx = (idx + 1 == row.count) ? 0 : idx + 1
+            
+            let crtCellWidth = row[idx]
+            // this is the maximum ammount of space that we need to add or subtract from this cell
+            let changeAmmount = (abs(spacePerCellChange) > abs(totalSpace)) ? totalSpace : spacePerCellChange
+            
+            // we check if the cell is allowed to grow or shrink by this ammount
+            let newWidth = crtCellWidth + changeAmmount
+            
+            if newWidth > maxCellWidth{
+                // looks like the cell will be bigger then the allowed size... we increase the size to maximum allowed
+                row[idx] = maxCellWidth
+                // we remove from the total space the ammount of space we added to this cell
+                totalSpace -= maxCellWidth - crtCellWidth
+                continue
+            }
+            else if newWidth < minCellWidth{
+                // looks like the cell will be smaller then the allowed size... we decrease the size to maximum allowed
+                row[idx] = minCellWidth
+                // we remove from the total space the ammount of space we added to this cell
+                totalSpace -= minCellWidth - crtCellWidth
+                continue
+            }
+            else{
+                
+                totalSpace -= changeAmmount
+                row[idx] = newWidth
+            }
+        }
+        
+        return row
+    }
+    func validateFocusedCellSize(_ size: CGSize) -> CGSize{
+        if size.width > maxCellWidth{
+            return CGSize(width: maxCellWidth, height: size.height)
+        }
+        else if size.width < minCellWidth{
+            return CGSize(width: minCellWidth, height: size.height)
+        }
+        
+        return size
     }
     
     
     //MARK: - Helpers
     /// returns the row position of a cell at a specific index path. For example if the collectionview has 3 cells in a row, the idx 0,1 or 2 will return position 0,1 or 2 but idx 3 will return position 0 since it's the first cell on the second row
-    private func getPositionInRowFor(indexPath: IndexPath) -> Int{
+    func getPositionInRowFor(indexPath: IndexPath) -> Int{
         let result = indexPath.row % nrOfCellsInRow
         return result
-    }
-    
-    /// this function will calculate the new size for the cell which the user interacts with. The size is changed on different axes based on the gesture. The gesture is devided in three types: horizontal(will only change the width), vertical(will only change the height), diagonal(will change both)
-    func calculateSizeFor(pinchGesture: UIPinchGestureRecognizer) -> CGSize?{
-        // we need at least 2 points to calculate the angle
-        guard pinchGesture.numberOfTouches > 1 else {return nil}
-        let locationOne = pinchGesture.location(ofTouch: 0, in: pinchGesture.view)
-        let locationTwo = pinchGesture.location(ofTouch: 1, in: pinchGesture.view)
-        let diffX = locationOne.x - locationTwo.x
-        let diffY = locationOne.y - locationTwo.y
-        
-        /// the angle of the gesture
-        let bearingAngle = diffY == 0 ? CGFloat.pi / 2.0 : abs(atan(diffX/diffY))
-        
-        if bearingAngle < CGFloat.pi / 6.0 {
-            // vertical
-            pinchType = .vertical
-        }
-        else if bearingAngle < CGFloat.pi / 3.0 {
-            // diagonal
-            pinchType = .diagonal
-        }
-        else if bearingAngle <= CGFloat.pi / 2.0 {
-            // horizontal
-            pinchType = .horizontal
-        }
-
-        if pinchGesture.state == .began{
-            // at the beggining of the gesture we store the original size of the cell and we reset any scale that we previously set
-            focusedCellSize = pinchGesture.view?.frame.size
-            horScale = 1
-            vertSacle = 1
-        }
-        else if pinchGesture.state == .changed{
-            // during the change we apply the scale on width/height depending on the gesture type
-            guard let size = focusedCellSize else {return nil}
-            switch pinchType{
-            case .horizontal:
-                horScale = pinchGesture.scale
-                var width = size.width * horScale
-                if width > maxCellWidth{
-                    width = maxCellWidth
-                }
-                return CGSize(width: width, height: size.height * vertSacle)
-            case .vertical:
-                vertSacle = pinchGesture.scale
-                var width = size.width * horScale
-                if width > maxCellWidth{
-                    width = maxCellWidth
-                }
-                return CGSize(width: width, height: size.height * vertSacle)
-            case .diagonal:
-                horScale = pinchGesture.scale
-                vertSacle = pinchGesture.scale
-                var width = size.width * horScale
-                if width > maxCellWidth{
-                    width = maxCellWidth
-                }
-                return CGSize(width: width, height: size.height * vertSacle)
-            case .none: return nil
-            }
-        }
-        
-        
-        return nil
     }
     
     func getCellModel(indexPath: IndexPath) -> CustomCollectionViewCellViewModel{
@@ -281,5 +264,83 @@ class CollectionViewViewModel {
             return CustomCollectionViewCellViewModel(titleString: nil, descriptionString: datasource[indexPath.row].planet.description)
         }
     }
+    
+    //MARK: Pinch Gesture
+    /// this function will calculate the new size for the cell which the user interacts with.
+    func calculateSizeFor(pinchGesture: UIPinchGestureRecognizer) -> CGSize?{
+        // we need at least 2 points to calculate the angle
+        guard pinchGesture.numberOfTouches > 1 else {return nil}
+        let locationOne = pinchGesture.location(ofTouch: 0, in: pinchGesture.view)
+        let locationTwo = pinchGesture.location(ofTouch: 1, in: pinchGesture.view)
+        pinchType = determinegestureTypeForTouchLocations(loc1: locationOne, loc2: locationTwo)
+
+        if pinchGesture.state == .began{
+            // at the beggining of the gesture we store the original size of the cell and we reset any scale that we previously set
+            focusedCellSize = pinchGesture.view?.frame.size
+            horScale = 1
+            vertSacle = 1
+        }
+        else if pinchGesture.state == .changed{
+            // during the change we apply the scale on width/height depending on the gesture type
+            return calculateCellSizeForPinchGestureType(pinchType, scale: pinchGesture.scale)
+        }
+        
+        return nil
+    }
+    
+    /// returns the size of the cell. The size is changed on different axes based on the gesture. The gesture is devided in three types: horizontal(will only change the width), vertical(will only change the height), diagonal(will change both)
+    func calculateCellSizeForPinchGestureType(_ gestureType: GestureType, scale: CGFloat) -> CGSize?{
+        guard let size = focusedCellSize else {return nil}
+        switch gestureType{
+        case .horizontal:
+            horScale = scale
+            var width = size.width * horScale
+            if width > maxCellWidth{
+                width = maxCellWidth
+            }
+            return CGSize(width: width, height: size.height * vertSacle)
+        case .vertical:
+            vertSacle = scale
+            var width = size.width * horScale
+            if width > maxCellWidth{
+                width = maxCellWidth
+            }
+            return CGSize(width: width, height: size.height * vertSacle)
+        case .diagonal:
+            horScale = scale
+            vertSacle = scale
+            var width = size.width * horScale
+            if width > maxCellWidth{
+                width = maxCellWidth
+            }
+            return CGSize(width: width, height: size.height * vertSacle)
+        }
+    }
+    
+    /// returns the type of the pinch gesture. If the two touch locations of the fingers are spread more horizontally or vertically it will return one of the two types, or it will return "diagonally" if it's the case
+    func determinegestureTypeForTouchLocations(loc1: CGPoint, loc2: CGPoint) -> GestureType{
+        let diffX = loc1.x - loc2.x
+        let diffY = loc1.y - loc2.y
+        
+        /// the angle of the gesture
+        let bearingAngle = diffY == 0 ? CGFloat.pi / 2.0 : abs(atan(diffX / diffY))
+        
+        if bearingAngle < CGFloat.pi / 6.0 {
+            // vertical
+            return .vertical
+        }
+        else if bearingAngle < CGFloat.pi / 3.0 {
+            // diagonal
+            return .diagonal
+        }
+        else if bearingAngle <= CGFloat.pi / 2.0 {
+            // horizontal
+            return .horizontal
+        }
+        
+        return .diagonal
+    }
+    
+    
     
 }
