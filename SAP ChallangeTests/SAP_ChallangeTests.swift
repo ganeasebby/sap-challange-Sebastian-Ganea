@@ -130,5 +130,69 @@ class SAP_ChallangeTests: XCTestCase {
         XCTAssertEqual(result.width, model.calculateMaxCellWidth())
         
     }
+    
+    func testCOllectionViewModeldistributeTheRemainingSpaceBetweenAllCellsInRow(){
+        let model = CollectionViewViewModel(collectionViewWidth: 300)
+        var rowWidths: [CGFloat] = [50, 50]
+        
+        //test cell increase
+        var spaceToDistribute: CGFloat = 100
+        var result = model.distributeTheRemainingSpaceBetweenAllCellsInRow(rowWidths, spaceToDistribute: spaceToDistribute)
+        var spacePerCell = spaceToDistribute / ( CGFloat(model.nrOfCellsInRow) - 1)
+        var expected = rowWidths.map({$0 + spacePerCell})
+        XCTAssertEqual(result, expected)
+        
+        // test cell decrease
+        rowWidths = [140, 140]
+        spaceToDistribute = -100
+        result = model.distributeTheRemainingSpaceBetweenAllCellsInRow(rowWidths, spaceToDistribute: spaceToDistribute)
+        spacePerCell = spaceToDistribute / ( CGFloat(model.nrOfCellsInRow) - 1)
+        expected = rowWidths.map({$0 + spacePerCell})
+        XCTAssertEqual(result, expected)
+        
+        // test cell decrease below minimum cell size
+        rowWidths = [60, 60]
+        spaceToDistribute = -110
+        result = model.distributeTheRemainingSpaceBetweenAllCellsInRow(rowWidths, spaceToDistribute: spaceToDistribute)
+        spacePerCell = spaceToDistribute / ( CGFloat(model.nrOfCellsInRow) - 1)
+        expected = [model.minCellWidth, model.minCellWidth]
+        XCTAssertEqual(result, expected)
+        
+        //test cell increase above maximum cell width
+        spaceToDistribute = 500
+        result = model.distributeTheRemainingSpaceBetweenAllCellsInRow(rowWidths, spaceToDistribute: spaceToDistribute)
+        spacePerCell = spaceToDistribute / ( CGFloat(model.nrOfCellsInRow) - 1)
+        let max = model.calculateMaxCellWidth()
+        expected = [max, max]
+        XCTAssertEqual(result, expected)
+    }
+    
+    func testCollectionViewModelgetAllRowIndexpathsFor(){
+        let model = CollectionViewViewModel(collectionViewWidth: 300)
+        let indexPath = IndexPath(row: 23, section: 0)
+        let result = model.getAllRowIndexpathsFor(indexPath: indexPath)
+        
+        let position = model.getPositionInRowFor(indexPath: indexPath)
+        let rowStart = indexPath.row - position
+        var rowEnd = rowStart + model.nrOfCellsInRow - 1
+        if rowEnd >= model.datasource.count {
+            rowEnd = model.datasource.count - 1
+        }
+        
+        XCTAssertEqual(result[0], IndexPath(row: rowStart, section: 0))
+        XCTAssertEqual(result.last, IndexPath(row: rowEnd, section: 0))
+        
+    }
+    
+    func testCollectionViewModelsetSizeForCell(){
+        let model = CollectionViewViewModel(collectionViewWidth: 300)
+        let indexpath = IndexPath(row: 5, section: 0)
+        let size = CGSize(width: 100, height: 280)
+        model.setSizeForCellAt(indexPath: indexpath, size: size)
+        
+        let cell = model.datasource[indexpath.row]
+        
+        XCTAssertEqual(cell.cellSize, size)
+    }
 
 }
