@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		986BE68D288AC95200DA53FC /* DataSourceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986BE68C288AC95200DA53FC /* DataSourceFactory.swift */; };
+		986BE68E288ACF4700DA53FC /* DataSourceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986BE68C288AC95200DA53FC /* DataSourceFactory.swift */; };
 		988E44A02885423300D16752 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E449F2885423300D16752 /* AppDelegate.swift */; };
 		988E44A22885423300D16752 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E44A12885423300D16752 /* SceneDelegate.swift */; };
 		988E44A42885423300D16752 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E44A32885423300D16752 /* ViewController.swift */; };
@@ -35,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		986BE68C288AC95200DA53FC /* DataSourceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceFactory.swift; sourceTree = "<group>"; };
 		988E449C2885423300D16752 /* SAP Challange.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SAP Challange.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		988E449F2885423300D16752 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		988E44A12885423300D16752 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +94,7 @@
 		988E449E2885423300D16752 /* SAP Challange */ = {
 			isa = PBXGroup;
 			children = (
+				986BE68C288AC95200DA53FC /* DataSourceFactory.swift */,
 				988E44BC2885AC6800D16752 /* Model */,
 				988E44B32885428200D16752 /* CollectionView */,
 				988E449F2885423300D16752 /* AppDelegate.swift */,
@@ -241,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				988E44BF2885ADD300D16752 /* CustomCollectionViewCellViewModel.swift in Sources */,
+				986BE68D288AC95200DA53FC /* DataSourceFactory.swift in Sources */,
 				988E44B5288542CF00D16752 /* CollectionViewController.swift in Sources */,
 				988E44B9288574AA00D16752 /* CollectionViewViewModel.swift in Sources */,
 				988E44B72885612600D16752 /* CustomCollectionViewCell.swift in Sources */,
@@ -256,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				989D99732888556000CE2EE0 /* CustomCollectionViewCellViewModel.swift in Sources */,
+				986BE68E288ACF4700DA53FC /* DataSourceFactory.swift in Sources */,
 				989D99722888555000CE2EE0 /* Model.swift in Sources */,
 				989D996B288850AA00CE2EE0 /* SAP_ChallangeTests.swift in Sources */,
 				989D9971288852C900CE2EE0 /* CollectionViewViewModel.swift in Sources */,

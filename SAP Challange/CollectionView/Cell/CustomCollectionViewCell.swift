@@ -12,17 +12,18 @@ class CustomCollectionViewCell: UICollectionViewCell {
     private var titleLabel: UILabel?
     private var textview: UITextView?
     
-    func setupWithModel(_ model: CustomCollectionViewCellViewModel){
-        if model.titleString != nil{
+    func setupWithModel(_ viewModel: CustomCollectionViewCellViewModel){
+        
+        if viewModel.type == .label{
             titleLabel = UILabel()
             titleLabel?.textAlignment = .center
-            titleLabel?.text = model.titleString
+            titleLabel?.text = viewModel.text
             titleLabel?.backgroundColor = .white
             self.contentView.addSubview(titleLabel!)
         }
-        else if model.descriptionString != nil{
+        else if viewModel.type == .textView{
             textview = UITextView()
-            textview?.text = model.descriptionString
+            textview?.text = viewModel.text
             textview?.textAlignment = .center
             textview?.isEditable = false
             self.contentView.addSubview(textview!)
@@ -38,5 +39,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         contentView.subviews.forEach({$0.removeFromSuperview()})
+        titleLabel = nil
+        textview = nil
     }
 }

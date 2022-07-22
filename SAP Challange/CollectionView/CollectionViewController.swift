@@ -77,7 +77,7 @@ extension CollectionViewController: UICollectionViewDataSource{
 
 extension CollectionViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = viewModel.datasource[indexPath.row].cellSize
+        let size = viewModel.layoutObj[indexPath.row].size
         return size
     }
 }

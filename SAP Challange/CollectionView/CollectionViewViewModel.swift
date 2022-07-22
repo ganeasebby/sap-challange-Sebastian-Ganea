@@ -9,10 +9,9 @@ import UIKit
 
 class CollectionViewViewModel {
     
-    /// a structure that is used to populate the collectionview. It combines the model and the cell calcuclated size
-    struct DatasourceObject{
-        let model: SAPModel
-        var cellSize: CGSize
+    /// a struct used to layout the cells, Like size, or visual state of the item
+    struct LayoutItemObject{
+        var size: CGSize
     }
     
     /// The possible ways the user can perform a pinch gesture with two fingers.
@@ -23,7 +22,10 @@ class CollectionViewViewModel {
     }
     
     /// this is the datasource we use to populate the collectionview
-    var datasource: [DatasourceObject]!
+    var datasource = [SAPModel]()
+    
+    /// this is the layout object based on which the cells are arranged
+    var layoutObj = [LayoutItemObject]()
     
     /// The total ammount of cells the collectionview will display horrizontally
     let nrOfCellsInRow = 3
@@ -60,27 +62,10 @@ class CollectionViewViewModel {
         updateCollectionviewWidth(collectionViewWidth)
     }
     
-    /// generates a dummy datasource
-    private func createDataSource() -> [DatasourceObject]{
-        var dummy = [DatasourceObject]()
-        let dummyDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        for i in 0 ... 100{
-            let position = getPositionInRowFor(indexPath: IndexPath(row: i, section: 0))
-            let obj: DatasourceObject
-            
-            if position == 0 {
-                let model = LabelModel(titleStr: "Label")
-                obj = DatasourceObject(model: model, cellSize: defaultCellSize)
-                
-            }
-            else{
-                let model = TextViewModel(titleStr: nil, textviewStr: dummyDescription)
-                obj = DatasourceObject(model: model, cellSize: defaultCellSize)
-            }
-            dummy.append(obj)
-        }
-        
-        return dummy
+    /// create the layoutObject for the collectionview
+    private func initializeLayoutObject(){
+        layoutObj.removeAll()
+        datasource.forEach({_ in layoutObj.append(LayoutItemObject(size: defaultCellSize))})
     }
     
     
@@ -90,7 +75,8 @@ class CollectionViewViewModel {
         collectionviewWidth = newWidth
         self.maxCellWidth = calculateMaxCellWidth()
         self.defaultCellSize = calculateDefaultCellSize()
-        datasource = createDataSource()
+        datasource = DataSourceFactory.getData()
+        initializeLayoutObject()
     }
     /// calculates and returns the initial size for cells. The size of the cells is maximized so that enough cells will fit in one row(nrOfCellsInRow).
     func calculateDefaultCellSize() -> CGSize{
@@ -118,20 +104,20 @@ class CollectionViewViewModel {
         let focusedCellPosition = getPositionInRowFor(indexPath: indexPath)
         
         // First we make sure that the new size is valid
-        let originalSizeForFocusedCell = datasource[indexPath.row].cellSize
+        let originalSizeForFocusedCell = layoutObj[indexPath.row].size
         let sizeForFocusedCell = validateFocusedCellSize(size)
         
         
         // Next we update the height for all cells that are on the same row with the cell that the user interacts with. We only need to update the height on this row according to the requirements (and example given)
         for idx in getAllRowIndexpathsFor(indexPath: indexPath){
-            datasource[idx.row].cellSize.height = sizeForFocusedCell.height
+            layoutObj[idx.row].size.height = sizeForFocusedCell.height
         }
         
         /// we create an array that holds the width for every cell in a row
         var cellsWidthInARow = [CGFloat]()
         for idx in getAllRowIndexpathsFor(indexPath: IndexPath(row: 0, section: 0)){
             if idx.row != focusedCellPosition{
-                cellsWidthInARow.append(datasource[idx.row].cellSize.width)
+                cellsWidthInARow.append(layoutObj[idx.row].size.width)
             }
         }
         
@@ -152,9 +138,9 @@ class CollectionViewViewModel {
 //        print("\(cellsWidthInARow[0]) + \(cellsWidthInARow[1]) + \(cellsWidthInARow[2]) + \((CGFloat(nrOfCellsInRow) + 1) * cellPadding)) = \(cellsWidthInARow[0] + cellsWidthInARow[1] + cellsWidthInARow[2] + ((CGFloat(nrOfCellsInRow) + 1) * cellPadding))")
         
         // And finally we update every cell width in the datasource, using the sizes we defind in `rowWidthSizes`
-        for index in 0 ... datasource.count - 1{
+        for index in 0 ... layoutObj.count - 1{
             let rowPosition = index % nrOfCellsInRow
-            datasource[index].cellSize.width = cellsWidthInARow[rowPosition]
+            layoutObj[index].size.width = cellsWidthInARow[rowPosition]
         }
         
     }
@@ -240,8 +226,8 @@ class CollectionViewViewModel {
         let position = getPositionInRowFor(indexPath: indexPath)
         let rowStart = indexPath.row - position
         var rowEnd = rowStart + nrOfCellsInRow - 1
-        if rowEnd >= datasource.count {
-            rowEnd = datasource.count - 1
+        if rowEnd >= layoutObj.count {
+            rowEnd = layoutObj.count - 1
         }
         
         var indexes = [IndexPath]()
@@ -253,7 +239,7 @@ class CollectionViewViewModel {
     
     /// generates and returns CustomCellViewModels
     func getCellModel(indexPath: IndexPath) -> CustomCollectionViewCellViewModel{
-        return CustomCollectionViewCellViewModel(model: datasource[indexPath.row].model)
+        return CustomCollectionViewCellViewModel(model: datasource[indexPath.row])
     }
     
     //MARK: Pinch Gesture

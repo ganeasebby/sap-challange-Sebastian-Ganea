@@ -9,11 +9,11 @@ import Foundation
 import UIKit
 
 struct CustomCollectionViewCellViewModel{
-    let titleString: String?
-    let descriptionString: String?
+    let text: String?
+    let type: ModelType!
     
     init(model: SAPModel){
-        titleString = model.titleStr
-        descriptionString = model.textviewStr
+        self.type = model.type
+        self.text = model.text
     }
 }

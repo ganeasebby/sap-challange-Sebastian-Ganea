@@ -6,23 +6,23 @@
 //
 
 import Foundation
-import UIKit
+
+enum ModelType{
+    case label
+    case textView
+}
 
 protocol SAPModel{
-    var titleStr: String? { get set }
-    var textviewStr: String? { get set }
+    var type: ModelType { get }
+    var text: String? { get set }
 }
-extension SAPModel{
-    var textviewStr: String? { return nil }
-}
-
 
 struct LabelModel: SAPModel {
-    var titleStr: String?
-    var textviewStr: String?
+    let type: ModelType = .label
+    var text: String?
 }
 
 struct TextViewModel: SAPModel{
-    var titleStr: String?
-    var textviewStr: String?
+    let type: ModelType = .textView
+    var text: String?
 }

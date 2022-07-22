@@ -190,9 +190,15 @@ class SAP_ChallangeTests: XCTestCase {
         let size = CGSize(width: 100, height: 280)
         model.setSizeForCellAt(indexPath: indexpath, size: size)
         
-        let cell = model.datasource[indexpath.row]
+        let cell = model.layoutObj[indexpath.row]
         
-        XCTAssertEqual(cell.cellSize, size)
+        XCTAssertEqual(cell.size, size)
+    }
+    
+    func testDataSourceFactoryGetData(){
+        let count = 34
+        let resutl = DataSourceFactory.generateDummyModels(count)
+        XCTAssertEqual(resutl.count, count)
     }
 
 }
