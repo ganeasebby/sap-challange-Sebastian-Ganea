@@ -11,4 +11,9 @@ import UIKit
 struct CustomCollectionViewCellViewModel{
     let titleString: String?
     let descriptionString: String?
+    
+    init(model: SAPModel){
+        titleString = model.titleStr
+        descriptionString = model.textviewStr
+    }
 }

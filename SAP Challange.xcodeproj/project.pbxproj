@@ -16,11 +16,11 @@
 		988E44B5288542CF00D16752 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E44B4288542CF00D16752 /* CollectionViewController.swift */; };
 		988E44B72885612600D16752 /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E44B62885612600D16752 /* CustomCollectionViewCell.swift */; };
 		988E44B9288574AA00D16752 /* CollectionViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E44B8288574AA00D16752 /* CollectionViewViewModel.swift */; };
-		988E44BB2885ABBD00D16752 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E44BA2885ABBD00D16752 /* Planet.swift */; };
+		988E44BB2885ABBD00D16752 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E44BA2885ABBD00D16752 /* Model.swift */; };
 		988E44BF2885ADD300D16752 /* CustomCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E44BE2885ADD300D16752 /* CustomCollectionViewCellViewModel.swift */; };
 		989D996B288850AA00CE2EE0 /* SAP_ChallangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D996A288850AA00CE2EE0 /* SAP_ChallangeTests.swift */; };
 		989D9971288852C900CE2EE0 /* CollectionViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E44B8288574AA00D16752 /* CollectionViewViewModel.swift */; };
-		989D99722888555000CE2EE0 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E44BA2885ABBD00D16752 /* Planet.swift */; };
+		989D99722888555000CE2EE0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E44BA2885ABBD00D16752 /* Model.swift */; };
 		989D99732888556000CE2EE0 /* CustomCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E44BE2885ADD300D16752 /* CustomCollectionViewCellViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +46,7 @@
 		988E44B4288542CF00D16752 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		988E44B62885612600D16752 /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 		988E44B8288574AA00D16752 /* CollectionViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewViewModel.swift; sourceTree = "<group>"; };
-		988E44BA2885ABBD00D16752 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
+		988E44BA2885ABBD00D16752 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		988E44BE2885ADD300D16752 /* CustomCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		989D9968288850AA00CE2EE0 /* SAP ChallangeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SAP ChallangeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		989D996A288850AA00CE2EE0 /* SAP_ChallangeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAP_ChallangeTests.swift; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 		988E44BC2885AC6800D16752 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				988E44BA2885ABBD00D16752 /* Planet.swift */,
+				988E44BA2885ABBD00D16752 /* Model.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -246,7 +246,7 @@
 				988E44B72885612600D16752 /* CustomCollectionViewCell.swift in Sources */,
 				988E44A42885423300D16752 /* ViewController.swift in Sources */,
 				988E44A02885423300D16752 /* AppDelegate.swift in Sources */,
-				988E44BB2885ABBD00D16752 /* Planet.swift in Sources */,
+				988E44BB2885ABBD00D16752 /* Model.swift in Sources */,
 				988E44A22885423300D16752 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,7 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				989D99732888556000CE2EE0 /* CustomCollectionViewCellViewModel.swift in Sources */,
-				989D99722888555000CE2EE0 /* Planet.swift in Sources */,
+				989D99722888555000CE2EE0 /* Model.swift in Sources */,
 				989D996B288850AA00CE2EE0 /* SAP_ChallangeTests.swift in Sources */,
 				989D9971288852C900CE2EE0 /* CollectionViewViewModel.swift in Sources */,
 			);

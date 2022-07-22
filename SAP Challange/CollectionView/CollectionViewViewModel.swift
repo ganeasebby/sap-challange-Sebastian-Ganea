@@ -9,9 +9,9 @@ import UIKit
 
 class CollectionViewViewModel {
     
-    /// a structure that is used to populate the collectionview. It combines the model(Planet) and the cell calcuclated size
+    /// a structure that is used to populate the collectionview. It combines the model and the cell calcuclated size
     struct DatasourceObject{
-        let planet: Planet
+        let model: SAPModel
         var cellSize: CGSize
     }
     
@@ -65,9 +65,19 @@ class CollectionViewViewModel {
         var dummy = [DatasourceObject]()
         let dummyDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         for i in 0 ... 100{
-            let planet = Planet(title: "Planet \(i)", description: dummyDescription)
-            let dataSourceObj = DatasourceObject(planet: planet, cellSize: defaultCellSize)
-            dummy.append(dataSourceObj)
+            let position = getPositionInRowFor(indexPath: IndexPath(row: i, section: 0))
+            let obj: DatasourceObject
+            
+            if position == 0 {
+                let model = LabelModel(titleStr: "Label")
+                obj = DatasourceObject(model: model, cellSize: defaultCellSize)
+                
+            }
+            else{
+                let model = TextViewModel(titleStr: nil, textviewStr: dummyDescription)
+                obj = DatasourceObject(model: model, cellSize: defaultCellSize)
+            }
+            dummy.append(obj)
         }
         
         return dummy
@@ -243,16 +253,7 @@ class CollectionViewViewModel {
     
     /// generates and returns CustomCellViewModels
     func getCellModel(indexPath: IndexPath) -> CustomCollectionViewCellViewModel{
-        if getPositionInRowFor(indexPath: indexPath) == 0{
-            // first cells in row have labels
-            let label = UILabel()
-            label.text = datasource[indexPath.row].planet.title
-            return CustomCollectionViewCellViewModel(titleString: datasource[indexPath.row].planet.title, descriptionString: nil)
-        }
-        else{
-            // the rest of the cells have uitextviews
-            return CustomCollectionViewCellViewModel(titleString: nil, descriptionString: datasource[indexPath.row].planet.description)
-        }
+        return CustomCollectionViewCellViewModel(model: datasource[indexPath.row].model)
     }
     
     //MARK: Pinch Gesture
