@@ -9,11 +9,17 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
+    
+    func initializeFactory(){
+        ///
+        DataSourceFactory.shared = DataSourceFactory(factory: TestDataSourceFactory())
+//        DataSourceFactory.shared = DataSourceFactory(factory: ProductionDataSource())
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        initializeFactory()
         return true
     }
 

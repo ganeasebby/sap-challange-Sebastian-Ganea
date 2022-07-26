@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		985493A9288EE3DE00A0D17F /* TestDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985493A8288EE3DE00A0D17F /* TestDataSource.swift */; };
+		985493AA288EE3DE00A0D17F /* TestDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985493A8288EE3DE00A0D17F /* TestDataSource.swift */; };
+		985493AC288EE3F600A0D17F /* ProductionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985493AB288EE3F600A0D17F /* ProductionDataSource.swift */; };
+		985493AD288EE3F600A0D17F /* ProductionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985493AB288EE3F600A0D17F /* ProductionDataSource.swift */; };
 		986BE68D288AC95200DA53FC /* DataSourceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986BE68C288AC95200DA53FC /* DataSourceFactory.swift */; };
 		986BE68E288ACF4700DA53FC /* DataSourceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986BE68C288AC95200DA53FC /* DataSourceFactory.swift */; };
 		988E44A02885423300D16752 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E449F2885423300D16752 /* AppDelegate.swift */; };
@@ -20,6 +24,14 @@
 		988E44B9288574AA00D16752 /* CollectionViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E44B8288574AA00D16752 /* CollectionViewViewModel.swift */; };
 		988E44BB2885ABBD00D16752 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E44BA2885ABBD00D16752 /* Model.swift */; };
 		988E44BF2885ADD300D16752 /* CustomCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E44BE2885ADD300D16752 /* CustomCollectionViewCellViewModel.swift */; };
+		9894B959288EEF3C002B2B57 /* CellContentBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9894B958288EEF3C002B2B57 /* CellContentBuilder.swift */; };
+		9894B95A288EEF3C002B2B57 /* CellContentBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9894B958288EEF3C002B2B57 /* CellContentBuilder.swift */; };
+		989CCF77288FCED60024AA17 /* LabelContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989CCF76288FCED60024AA17 /* LabelContent.swift */; };
+		989CCF78288FCED60024AA17 /* LabelContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989CCF76288FCED60024AA17 /* LabelContent.swift */; };
+		989CCF7A288FCF640024AA17 /* TextViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989CCF79288FCF640024AA17 /* TextViewContent.swift */; };
+		989CCF7B288FCF640024AA17 /* TextViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989CCF79288FCF640024AA17 /* TextViewContent.swift */; };
+		989CCF7C288FDDC20024AA17 /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E44B62885612600D16752 /* CustomCollectionViewCell.swift */; };
+		989CCF7D288FE4290024AA17 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E44B4288542CF00D16752 /* CollectionViewController.swift */; };
 		989D996B288850AA00CE2EE0 /* SAP_ChallangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D996A288850AA00CE2EE0 /* SAP_ChallangeTests.swift */; };
 		989D9971288852C900CE2EE0 /* CollectionViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E44B8288574AA00D16752 /* CollectionViewViewModel.swift */; };
 		989D99722888555000CE2EE0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E44BA2885ABBD00D16752 /* Model.swift */; };
@@ -37,6 +49,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		985493A8288EE3DE00A0D17F /* TestDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDataSource.swift; sourceTree = "<group>"; };
+		985493AB288EE3F600A0D17F /* ProductionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductionDataSource.swift; sourceTree = "<group>"; };
 		986BE68C288AC95200DA53FC /* DataSourceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceFactory.swift; sourceTree = "<group>"; };
 		988E449C2885423300D16752 /* SAP Challange.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SAP Challange.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		988E449F2885423300D16752 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +65,9 @@
 		988E44B8288574AA00D16752 /* CollectionViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewViewModel.swift; sourceTree = "<group>"; };
 		988E44BA2885ABBD00D16752 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		988E44BE2885ADD300D16752 /* CustomCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
+		9894B958288EEF3C002B2B57 /* CellContentBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellContentBuilder.swift; sourceTree = "<group>"; };
+		989CCF76288FCED60024AA17 /* LabelContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelContent.swift; sourceTree = "<group>"; };
+		989CCF79288FCF640024AA17 /* TextViewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewContent.swift; sourceTree = "<group>"; };
 		989D9968288850AA00CE2EE0 /* SAP ChallangeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SAP ChallangeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		989D996A288850AA00CE2EE0 /* SAP_ChallangeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAP_ChallangeTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,6 +90,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		985493A7288EE3C400A0D17F /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				986BE68C288AC95200DA53FC /* DataSourceFactory.swift */,
+				985493A8288EE3DE00A0D17F /* TestDataSource.swift */,
+				985493AB288EE3F600A0D17F /* ProductionDataSource.swift */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
 		988E44932885423300D16752 = {
 			isa = PBXGroup;
 			children = (
@@ -94,9 +121,10 @@
 		988E449E2885423300D16752 /* SAP Challange */ = {
 			isa = PBXGroup;
 			children = (
-				986BE68C288AC95200DA53FC /* DataSourceFactory.swift */,
+				985493A7288EE3C400A0D17F /* DataSource */,
 				988E44BC2885AC6800D16752 /* Model */,
 				988E44B32885428200D16752 /* CollectionView */,
+				9894B957288EEF1F002B2B57 /* CollectionViewUtility */,
 				988E449F2885423300D16752 /* AppDelegate.swift */,
 				988E44A12885423300D16752 /* SceneDelegate.swift */,
 				988E44A32885423300D16752 /* ViewController.swift */,
@@ -133,6 +161,16 @@
 				988E44BE2885ADD300D16752 /* CustomCollectionViewCellViewModel.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		9894B957288EEF1F002B2B57 /* CollectionViewUtility */ = {
+			isa = PBXGroup;
+			children = (
+				9894B958288EEF3C002B2B57 /* CellContentBuilder.swift */,
+				989CCF76288FCED60024AA17 /* LabelContent.swift */,
+				989CCF79288FCF640024AA17 /* TextViewContent.swift */,
+			);
+			path = CollectionViewUtility;
 			sourceTree = "<group>";
 		};
 		989D9969288850AA00CE2EE0 /* SAP ChallangeTests */ = {
@@ -250,9 +288,14 @@
 				988E44B9288574AA00D16752 /* CollectionViewViewModel.swift in Sources */,
 				988E44B72885612600D16752 /* CustomCollectionViewCell.swift in Sources */,
 				988E44A42885423300D16752 /* ViewController.swift in Sources */,
+				985493A9288EE3DE00A0D17F /* TestDataSource.swift in Sources */,
+				989CCF7A288FCF640024AA17 /* TextViewContent.swift in Sources */,
 				988E44A02885423300D16752 /* AppDelegate.swift in Sources */,
+				989CCF77288FCED60024AA17 /* LabelContent.swift in Sources */,
+				985493AC288EE3F600A0D17F /* ProductionDataSource.swift in Sources */,
 				988E44BB2885ABBD00D16752 /* Model.swift in Sources */,
 				988E44A22885423300D16752 /* SceneDelegate.swift in Sources */,
+				9894B959288EEF3C002B2B57 /* CellContentBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,11 +303,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				989CCF7D288FE4290024AA17 /* CollectionViewController.swift in Sources */,
 				989D99732888556000CE2EE0 /* CustomCollectionViewCellViewModel.swift in Sources */,
+				989CCF78288FCED60024AA17 /* LabelContent.swift in Sources */,
 				986BE68E288ACF4700DA53FC /* DataSourceFactory.swift in Sources */,
+				985493AA288EE3DE00A0D17F /* TestDataSource.swift in Sources */,
 				989D99722888555000CE2EE0 /* Model.swift in Sources */,
+				989CCF7B288FCF640024AA17 /* TextViewContent.swift in Sources */,
 				989D996B288850AA00CE2EE0 /* SAP_ChallangeTests.swift in Sources */,
+				985493AD288EE3F600A0D17F /* ProductionDataSource.swift in Sources */,
 				989D9971288852C900CE2EE0 /* CollectionViewViewModel.swift in Sources */,
+				9894B95A288EEF3C002B2B57 /* CellContentBuilder.swift in Sources */,
+				989CCF7C288FDDC20024AA17 /* CustomCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,7 @@ import XCTest
 
 class SAP_ChallangeTests: XCTestCase {
 
+    /// tests if the default cell size is correctly calculated. The cells need to fill the width of the screen
     func testCollectionViewModelDefualtCellSize(){
         let collectionViewWidth: CGFloat = 300
         let model = CollectionViewViewModel(collectionViewWidth: collectionViewWidth)
@@ -25,6 +26,7 @@ class SAP_ChallangeTests: XCTestCase {
         
     }
     
+    /// tests if the maximumCellWidth is calculated correctly. Each cell width size can only be increased to the point where the other cells in that row reach the minimum allowed size, Because increasing one cell will decreasee the other cells in that row
     func testCollectionViewModelMaxCellWidth(){
         let collectionViewWidth: CGFloat = 300
         let model = CollectionViewViewModel(collectionViewWidth: collectionViewWidth)
@@ -40,6 +42,7 @@ class SAP_ChallangeTests: XCTestCase {
         
     }
     
+    /// tests if the cells are correctly placed on collectionviews of different widths
     func testCollectionViewModelUpdateCollectionviewWidth(){
         // the model is intialized with a given width
         var collectionViewWidth: CGFloat = 300
@@ -66,6 +69,7 @@ class SAP_ChallangeTests: XCTestCase {
         
     }
     
+    /// tests if the "position in row" is correctly calculated
     func testCollectionViewModelGetPositionInRow(){
         let model = CollectionViewViewModel(collectionViewWidth: 300)
        let index = IndexPath(row: 25, section: 0)
@@ -77,6 +81,7 @@ class SAP_ChallangeTests: XCTestCase {
         
     }
     
+    /// tests if the pinch gesture direction type is calculated correctly
     func testCollectionViewModelDeterminegestureTypeForTouchLocations(){
         let model = CollectionViewViewModel(collectionViewWidth: 300)
         var loc1 = CGPoint(x: 0, y: 5)
@@ -96,6 +101,7 @@ class SAP_ChallangeTests: XCTestCase {
         
     }
     
+    /// tests if the cell size is calculated correctly after a specific pinch gesture type is applied
     func testCollectionViewModelCalculateCellSizeForPinchGestureType(){
         let model = CollectionViewViewModel(collectionViewWidth: 300)
         var gestureType = CollectionViewViewModel.GestureType.vertical
@@ -121,6 +127,7 @@ class SAP_ChallangeTests: XCTestCase {
         
     }
     
+    /// tests if a cell size is valid... if it's size is within the min/max bounds
     func testCollectionViewModelValidateFocusedCellSize(){
         let model = CollectionViewViewModel(collectionViewWidth: 300)
         var result = model.validateFocusedCellSize(CGSize(width: 20, height: 20))
@@ -131,7 +138,8 @@ class SAP_ChallangeTests: XCTestCase {
         
     }
     
-    func testCOllectionViewModeldistributeTheRemainingSpaceBetweenAllCellsInRow(){
+    /// tests if the other cells in a row are correctly increased or decreased after the user interacts with a cells in that row
+    func testCollectionViewModeldistributeTheRemainingSpaceBetweenAllCellsInRow(){
         let model = CollectionViewViewModel(collectionViewWidth: 300)
         var rowWidths: [CGFloat] = [50, 50]
         
@@ -167,7 +175,9 @@ class SAP_ChallangeTests: XCTestCase {
         XCTAssertEqual(result, expected)
     }
     
+    /// tests if the correct indexpaths are returned for the provided indexpath. Basically it should return all de indexpaths that are on the same row with the provided indexpath
     func testCollectionViewModelgetAllRowIndexpathsFor(){
+        DataSourceFactory.shared = DataSourceFactory(factory: TestDataSourceFactory())
         let model = CollectionViewViewModel(collectionViewWidth: 300)
         let indexPath = IndexPath(row: 23, section: 0)
         let result = model.getAllRowIndexpathsFor(indexPath: indexPath)
@@ -184,6 +194,8 @@ class SAP_ChallangeTests: XCTestCase {
         
     }
     
+    
+    /// tests if the cell that the user interacts with is correctly resized
     func testCollectionViewModelsetSizeForCell(){
         let model = CollectionViewViewModel(collectionViewWidth: 300)
         let indexpath = IndexPath(row: 5, section: 0)
@@ -195,10 +207,50 @@ class SAP_ChallangeTests: XCTestCase {
         XCTAssertEqual(cell.size, size)
     }
     
+    /// tests if the datasource is being generated
     func testDataSourceFactoryGetData(){
-        let count = 34
-        let resutl = DataSourceFactory.generateDummyModels(count)
-        XCTAssertEqual(resutl.count, count)
+        DataSourceFactory.shared = DataSourceFactory(factory: TestDataSourceFactory())
+        let result = DataSourceFactory.shared?.getData()
+        XCTAssertNotNil(result)
+        XCTAssertGreaterThan(result!.count, 10)
+    }
+    
+    /// tests if the content for the cells is correcly built based on the model
+    func testCustomCellViewModelGetContent(){
+        let str = "labelTest"
+        var model: SAPModel = LabelModel(text: str)
+        var viewModel = CustomCollectionViewCellViewModel(model: model)
+        var result = viewModel.getContent()
+        
+        XCTAssertTrue(result.isMember(of: LabelContent.self))
+        XCTAssertEqual((result as? UILabel)?.text, str)
+        
+        model = TextViewModel(text: str)
+        viewModel = CustomCollectionViewCellViewModel(model: model)
+        result = viewModel.getContent()
+        
+        XCTAssertTrue(result.isMember(of: TextViewContent.self))
+        XCTAssertEqual((result as? UITextView)?.text, str)
+    }
+    
+    /// tests if the setup and prepare for reuse for the customCellView is done correctly
+    func testCustomCollectionViewCellsetupWithModel(){
+        let str = "labelTest"
+        let cell = CustomCollectionViewCell()
+        let model: SAPModel = LabelModel(text: str)
+        let viewModel = CustomCollectionViewCellViewModel(model: model)
+        cell.setupWithModel(viewModel)
+        
+        let label = cell.contentView.subviews.first as? LabelContent
+        XCTAssertEqual(label?.text, str)
+        
+        cell.setNeedsLayout()
+        cell.layoutIfNeeded()
+        
+        XCTAssertEqual(label?.frame.size, cell.contentView.frame.size)
+        
+        cell.prepareForReuse()
+        XCTAssertEqual(cell.contentView.subviews, [])
     }
 
 }

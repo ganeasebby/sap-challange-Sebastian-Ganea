@@ -75,8 +75,17 @@ class CollectionViewViewModel {
         collectionviewWidth = newWidth
         self.maxCellWidth = calculateMaxCellWidth()
         self.defaultCellSize = calculateDefaultCellSize()
-        datasource = DataSourceFactory.getData()
+        
+        reloadDataSource()
         initializeLayoutObject()
+    }
+    func reloadDataSource(){
+        if let data = DataSourceFactory.shared?.getData(){
+            datasource = data
+        }
+        else{
+            datasource = []
+        }
     }
     /// calculates and returns the initial size for cells. The size of the cells is maximized so that enough cells will fit in one row(nrOfCellsInRow).
     func calculateDefaultCellSize() -> CGSize{
@@ -129,13 +138,7 @@ class CollectionViewViewModel {
         
         // after we finish distributing the space we also insert the cell width that the user interacetd with at the correct position in the row
         cellsWidthInARow.insert(sizeForFocusedCell.width, at: focusedCellPosition)
-        
-        
-//        print("total = \(collectionviewWidth!)")
-//        print("minCell = \(minCellWidth)")
-//        print("max = \(maxCellWidth!)")
-//        print("focused cell = \(sizeForFocusedCell.width)")
-//        print("\(cellsWidthInARow[0]) + \(cellsWidthInARow[1]) + \(cellsWidthInARow[2]) + \((CGFloat(nrOfCellsInRow) + 1) * cellPadding)) = \(cellsWidthInARow[0] + cellsWidthInARow[1] + cellsWidthInARow[2] + ((CGFloat(nrOfCellsInRow) + 1) * cellPadding))")
+
         
         // And finally we update every cell width in the datasource, using the sizes we defind in `rowWidthSizes`
         for index in 0 ... layoutObj.count - 1{

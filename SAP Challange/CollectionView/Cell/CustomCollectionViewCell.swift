@@ -8,38 +8,21 @@
 import UIKit
 
 class CustomCollectionViewCell: UICollectionViewCell {
-    
-    private var titleLabel: UILabel?
-    private var textview: UITextView?
+    private var content: UIView?
     
     func setupWithModel(_ viewModel: CustomCollectionViewCellViewModel){
-        
-        if viewModel.type == .label{
-            titleLabel = UILabel()
-            titleLabel?.textAlignment = .center
-            titleLabel?.text = viewModel.text
-            titleLabel?.backgroundColor = .white
-            self.contentView.addSubview(titleLabel!)
-        }
-        else if viewModel.type == .textView{
-            textview = UITextView()
-            textview?.text = viewModel.text
-            textview?.textAlignment = .center
-            textview?.isEditable = false
-            self.contentView.addSubview(textview!)
-        }
+        content = viewModel.getContent()
+        self.contentView.addSubview(content!)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        titleLabel?.frame = self.contentView.bounds
-        textview?.frame = self.contentView.bounds
+        content?.frame = self.contentView.bounds
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        contentView.subviews.forEach({$0.removeFromSuperview()})
-        titleLabel = nil
-        textview = nil
+        content?.removeFromSuperview()
+        content = nil
     }
 }

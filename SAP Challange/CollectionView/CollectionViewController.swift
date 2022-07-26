@@ -24,10 +24,9 @@ class CollectionViewController: UIViewController {
     
         setupCollectionView()
     }
-    private func setupCollectionView(){
+    func setupCollectionView(){
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = .lightGray
         if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout{
             flowLayout.minimumLineSpacing = viewModel.cellPadding
             flowLayout.minimumInteritemSpacing = viewModel.cellPadding
