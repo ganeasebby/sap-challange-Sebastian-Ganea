@@ -8,11 +8,16 @@
 import UIKit
 
 @main
+/// Main Application class
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    /// initialize Factory and Builder
-    func initializeFactory(){
+    /// initialize the application context
+    func initializeApplication(){
+        /// initialize the UIContent builder. A subclass for the extended functionality can be used
         ContentBuilder.builder = ContentBuilder()
+        
+        /// initialize the test datasource, for production use the production datasource
+        /// this initialization might be better configured. For example from a file.
         DataSourceFactory.shared = DataSourceFactory(factory: TestDataSourceFactory())
 //        DataSourceFactory.shared = DataSourceFactory(factory: ProductionDataSource())
     }
@@ -20,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        initializeFactory()
+        initializeApplication()
         return true
     }
 

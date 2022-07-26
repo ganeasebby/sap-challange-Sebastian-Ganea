@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// view controller of the CollectionView
 class CollectionViewController: UIViewController {
 
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -56,6 +57,7 @@ class CollectionViewController: UIViewController {
     }
 }
 
+/// adds functionality for the UICollectionViewDataSource
 extension CollectionViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.datasource.count
@@ -69,6 +71,7 @@ extension CollectionViewController: UICollectionViewDataSource{
     }
 }
 
+/// adds functionality for the UICollectionViewDelegateFlowLayout
 extension CollectionViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return viewModel.layoutObj[indexPath.row].size

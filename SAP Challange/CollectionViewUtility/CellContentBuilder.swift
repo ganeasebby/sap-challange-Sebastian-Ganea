@@ -8,13 +8,13 @@
 import Foundation
 import UIKit
 
-//protocol ContentBuilderProtocol {
-//    func build(_ model: SAPModel) throws -> UIView
-//}
+protocol ContentBuilderProtocol {
+    func build(_ model: SAPModel) throws -> UIView
+}
 
 /// Used  for building the content of the collectionviewcells based on the model
-class ContentBuilder{
-    static var builder: ContentBuilder?
+class ContentBuilder: ContentBuilderProtocol{
+    static var builder: ContentBuilderProtocol?
     
     /// builds the view that needs to be displayed by the cell based on the model
     func build(_ model: SAPModel) throws -> UIView {
