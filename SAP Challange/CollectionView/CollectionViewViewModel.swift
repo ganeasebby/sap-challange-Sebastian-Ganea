@@ -247,24 +247,18 @@ class CollectionViewViewModel {
     
     //MARK: Pinch Gesture
     /// this function will calculate the new size for the cell which the user interacts with.
-    func calculateSizeFor(pinchGesture: UIPinchGestureRecognizer) -> CGSize?{
-        // we need at least 2 points to calculate the angle
-        guard pinchGesture.numberOfTouches > 1 else {return nil}
-        let locationOne = pinchGesture.location(ofTouch: 0, in: pinchGesture.view)
-        let locationTwo = pinchGesture.location(ofTouch: 1, in: pinchGesture.view)
-        pinchType = determinegestureTypeForTouchLocations(loc1: locationOne, loc2: locationTwo)
+    func calculateSizeFor(pinch: UIPinchGestureRecognizer) -> CGSize?{
+        guard pinch.numberOfTouches > 1 else {return nil}
+        pinchType = getGestureTypeForTouchPoints(loc1: pinch.location(ofTouch: 0, in: pinch.view), loc2: pinch.location(ofTouch: 1, in: pinch.view))
 
-        if pinchGesture.state == .began{
-            // at the beggining of the gesture we store the original size of the cell and we reset any scale that we previously set
-            focusedCellSize = pinchGesture.view?.frame.size
+        if pinch.state == .began{
+            focusedCellSize = pinch.view?.frame.size
             horScale = 1
             vertSacle = 1
         }
-        else if pinchGesture.state == .changed{
-            // during the change we apply the scale on width/height depending on the gesture type
-            return calculateCellSizeForPinchGestureType(pinchType, scale: pinchGesture.scale)
+        else if pinch.state == .changed{
+            return calculateCellSizeForPinchGestureType(pinchType, scale: pinch.scale)
         }
-        
         return nil
     }
     
@@ -298,7 +292,7 @@ class CollectionViewViewModel {
     }
     
     /// returns the type of the pinch gesture. If the two touch locations of the fingers are spread more horizontally or vertically it will return one of the two types, or it will return "diagonally" if it's the case
-    func determinegestureTypeForTouchLocations(loc1: CGPoint, loc2: CGPoint) -> GestureType{
+    func getGestureTypeForTouchPoints(loc1: CGPoint, loc2: CGPoint) -> GestureType{
         let diffX = loc1.x - loc2.x
         let diffY = loc1.y - loc2.y
         
@@ -306,18 +300,14 @@ class CollectionViewViewModel {
         let bearingAngle = diffY == 0 ? CGFloat.pi / 2.0 : abs(atan(diffX / diffY))
         
         if bearingAngle < CGFloat.pi / 6.0 {
-            // vertical
             return .vertical
         }
         else if bearingAngle < CGFloat.pi / 3.0 {
-            // diagonal
             return .diagonal
         }
         else if bearingAngle <= CGFloat.pi / 2.0 {
-            // horizontal
             return .horizontal
         }
-        
         return .diagonal
     }
     

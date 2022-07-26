@@ -86,17 +86,17 @@ class SAP_ChallangeTests: XCTestCase {
         let model = CollectionViewViewModel(collectionViewWidth: 300)
         var loc1 = CGPoint(x: 0, y: 5)
         var loc2 = CGPoint(x: 0, y: 2)
-        var result = model.determinegestureTypeForTouchLocations(loc1: loc1, loc2: loc2)
+        var result = model.getGestureTypeForTouchPoints(loc1: loc1, loc2: loc2)
         XCTAssertEqual(result, .vertical)
         
         loc1 = CGPoint(x: 0, y: 0)
         loc2 = CGPoint(x: 4, y: 6)
-        result = model.determinegestureTypeForTouchLocations(loc1: loc1, loc2: loc2)
+        result = model.getGestureTypeForTouchPoints(loc1: loc1, loc2: loc2)
         XCTAssertEqual(result, .diagonal)
         
         loc1 = CGPoint(x: 0, y: 0)
         loc2 = CGPoint(x: 50, y: 10)
-        result = model.determinegestureTypeForTouchLocations(loc1: loc1, loc2: loc2)
+        result = model.getGestureTypeForTouchPoints(loc1: loc1, loc2: loc2)
         XCTAssertEqual(result, .horizontal)
         
     }
@@ -121,6 +121,11 @@ class SAP_ChallangeTests: XCTestCase {
         XCTAssertEqual(result, expectedsize)
         
         gestureType = .vertical
+        result = model.calculateCellSizeForPinchGestureType(gestureType, scale: scale)
+        expectedsize = CGSize(width: cellSize.width * scale, height: cellSize.width * scale)
+        XCTAssertEqual(result, expectedsize)
+        
+        gestureType = .diagonal
         result = model.calculateCellSizeForPinchGestureType(gestureType, scale: scale)
         expectedsize = CGSize(width: cellSize.width * scale, height: cellSize.width * scale)
         XCTAssertEqual(result, expectedsize)

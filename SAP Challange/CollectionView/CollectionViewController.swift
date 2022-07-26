@@ -10,8 +10,6 @@ import UIKit
 class CollectionViewController: UIViewController {
 
     @IBOutlet private weak var collectionView: UICollectionView!
-    
-    /// the model for the viewcontroller
     private var viewModel: CollectionViewViewModel!
     
     override func viewDidLoad() {
@@ -39,7 +37,7 @@ class CollectionViewController: UIViewController {
         guard let cell = gesture.view as? UICollectionViewCell else {return}
         guard let index = collectionView.indexPath(for: cell) else {return}
         
-        if let newSize = viewModel.calculateSizeFor(pinchGesture: gesture){
+        if let newSize = viewModel.calculateSizeFor(pinch: gesture){
             cell.bounds.size = newSize
             collectionView.bringSubviewToFront(cell)
             cell.layer.borderColor = UIColor.black.cgColor
@@ -56,28 +54,20 @@ class CollectionViewController: UIViewController {
 }
 
 extension CollectionViewController: UICollectionViewDataSource{
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.datasource.count
     }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "customCellIdentifier", for: indexPath) as? CustomCollectionViewCell else {return UICollectionViewCell()}
         
-        let model = viewModel.getCellModel(indexPath: indexPath)
-        cell.setupWithModel(model)
-        
-        let pinch = UIPinchGestureRecognizer(target: self, action: #selector(pinchGestureDetected(_:)))
-        cell.addGestureRecognizer(pinch)
-
+        cell.setupWithModel(viewModel.getCellModel(indexPath: indexPath))
+        cell.addGestureRecognizer(UIPinchGestureRecognizer(target: self, action: #selector(pinchGestureDetected(_:))))
         return cell
     }
-    
 }
 
 extension CollectionViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = viewModel.layoutObj[indexPath.row].size
-        return size
+        return viewModel.layoutObj[indexPath.row].size
     }
 }
