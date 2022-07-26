@@ -39,6 +39,16 @@
                ReferencedContainer = "container:SAP Challange.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "989CCF81288FE82E0024AA17"
+               BuildableName = "SAP ChallangeUITests.xctest"
+               BlueprintName = "SAP ChallangeUITests"
+               ReferencedContainer = "container:SAP Challange.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

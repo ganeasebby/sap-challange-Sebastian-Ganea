@@ -32,6 +32,8 @@
 		989CCF7B288FCF640024AA17 /* TextViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989CCF79288FCF640024AA17 /* TextViewContent.swift */; };
 		989CCF7C288FDDC20024AA17 /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E44B62885612600D16752 /* CustomCollectionViewCell.swift */; };
 		989CCF7D288FE4290024AA17 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E44B4288542CF00D16752 /* CollectionViewController.swift */; };
+		989CCF85288FE82E0024AA17 /* SAP_ChallangeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989CCF84288FE82E0024AA17 /* SAP_ChallangeUITests.swift */; };
+		989CCF87288FE82E0024AA17 /* SAP_ChallangeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989CCF86288FE82E0024AA17 /* SAP_ChallangeUITestsLaunchTests.swift */; };
 		989D996B288850AA00CE2EE0 /* SAP_ChallangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D996A288850AA00CE2EE0 /* SAP_ChallangeTests.swift */; };
 		989D9971288852C900CE2EE0 /* CollectionViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E44B8288574AA00D16752 /* CollectionViewViewModel.swift */; };
 		989D99722888555000CE2EE0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E44BA2885ABBD00D16752 /* Model.swift */; };
@@ -39,6 +41,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		989CCF88288FE82E0024AA17 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 988E44942885423300D16752 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 988E449B2885423300D16752;
+			remoteInfo = "SAP Challange";
+		};
 		989D996C288850AA00CE2EE0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 988E44942885423300D16752 /* Project object */;
@@ -68,12 +77,22 @@
 		9894B958288EEF3C002B2B57 /* CellContentBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellContentBuilder.swift; sourceTree = "<group>"; };
 		989CCF76288FCED60024AA17 /* LabelContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelContent.swift; sourceTree = "<group>"; };
 		989CCF79288FCF640024AA17 /* TextViewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewContent.swift; sourceTree = "<group>"; };
+		989CCF82288FE82E0024AA17 /* SAP ChallangeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SAP ChallangeUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		989CCF84288FE82E0024AA17 /* SAP_ChallangeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAP_ChallangeUITests.swift; sourceTree = "<group>"; };
+		989CCF86288FE82E0024AA17 /* SAP_ChallangeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAP_ChallangeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		989D9968288850AA00CE2EE0 /* SAP ChallangeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SAP ChallangeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		989D996A288850AA00CE2EE0 /* SAP_ChallangeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAP_ChallangeTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		988E44992885423300D16752 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		989CCF7F288FE82E0024AA17 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -105,6 +124,7 @@
 			children = (
 				988E449E2885423300D16752 /* SAP Challange */,
 				989D9969288850AA00CE2EE0 /* SAP ChallangeTests */,
+				989CCF83288FE82E0024AA17 /* SAP ChallangeUITests */,
 				988E449D2885423300D16752 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -114,6 +134,7 @@
 			children = (
 				988E449C2885423300D16752 /* SAP Challange.app */,
 				989D9968288850AA00CE2EE0 /* SAP ChallangeTests.xctest */,
+				989CCF82288FE82E0024AA17 /* SAP ChallangeUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -173,6 +194,15 @@
 			path = CollectionViewUtility;
 			sourceTree = "<group>";
 		};
+		989CCF83288FE82E0024AA17 /* SAP ChallangeUITests */ = {
+			isa = PBXGroup;
+			children = (
+				989CCF84288FE82E0024AA17 /* SAP_ChallangeUITests.swift */,
+				989CCF86288FE82E0024AA17 /* SAP_ChallangeUITestsLaunchTests.swift */,
+			);
+			path = "SAP ChallangeUITests";
+			sourceTree = "<group>";
+		};
 		989D9969288850AA00CE2EE0 /* SAP ChallangeTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,6 +230,24 @@
 			productName = "SAP Challange";
 			productReference = 988E449C2885423300D16752 /* SAP Challange.app */;
 			productType = "com.apple.product-type.application";
+		};
+		989CCF81288FE82E0024AA17 /* SAP ChallangeUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 989CCF8A288FE82E0024AA17 /* Build configuration list for PBXNativeTarget "SAP ChallangeUITests" */;
+			buildPhases = (
+				989CCF7E288FE82E0024AA17 /* Sources */,
+				989CCF7F288FE82E0024AA17 /* Frameworks */,
+				989CCF80288FE82E0024AA17 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				989CCF89288FE82E0024AA17 /* PBXTargetDependency */,
+			);
+			name = "SAP ChallangeUITests";
+			productName = "SAP ChallangeUITests";
+			productReference = 989CCF82288FE82E0024AA17 /* SAP ChallangeUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		989D9967288850AA00CE2EE0 /* SAP ChallangeTests */ = {
 			isa = PBXNativeTarget;
@@ -232,6 +280,10 @@
 					988E449B2885423300D16752 = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
+					989CCF81288FE82E0024AA17 = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = 988E449B2885423300D16752;
+					};
 					989D9967288850AA00CE2EE0 = {
 						CreatedOnToolsVersion = 13.4.1;
 						TestTargetID = 988E449B2885423300D16752;
@@ -253,6 +305,7 @@
 			targets = (
 				988E449B2885423300D16752 /* SAP Challange */,
 				989D9967288850AA00CE2EE0 /* SAP ChallangeTests */,
+				989CCF81288FE82E0024AA17 /* SAP ChallangeUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -265,6 +318,13 @@
 				988E44AC2885423400D16752 /* LaunchScreen.storyboard in Resources */,
 				988E44A92885423400D16752 /* Assets.xcassets in Resources */,
 				988E44A72885423300D16752 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		989CCF80288FE82E0024AA17 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,6 +359,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		989CCF7E288FE82E0024AA17 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				989CCF85288FE82E0024AA17 /* SAP_ChallangeUITests.swift in Sources */,
+				989CCF87288FE82E0024AA17 /* SAP_ChallangeUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		989D9964288850AA00CE2EE0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -321,6 +390,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		989CCF89288FE82E0024AA17 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 988E449B2885423300D16752 /* SAP Challange */;
+			targetProxy = 989CCF88288FE82E0024AA17 /* PBXContainerItemProxy */;
+		};
 		989D996D288850AA00CE2EE0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 988E449B2885423300D16752 /* SAP Challange */;
@@ -520,6 +594,40 @@
 			};
 			name = Release;
 		};
+		989CCF8B288FE82E0024AA17 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R9RAD94PLQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "sap-challange-sebastian-ganea.SAP-ChallangeUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "SAP Challange";
+			};
+			name = Debug;
+		};
+		989CCF8C288FE82E0024AA17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R9RAD94PLQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "sap-challange-sebastian-ganea.SAP-ChallangeUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "SAP Challange";
+			};
+			name = Release;
+		};
 		989D996E288850AA00CE2EE0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -573,6 +681,15 @@
 			buildConfigurations = (
 				988E44B12885423400D16752 /* Debug */,
 				988E44B22885423400D16752 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		989CCF8A288FE82E0024AA17 /* Build configuration list for PBXNativeTarget "SAP ChallangeUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				989CCF8B288FE82E0024AA17 /* Debug */,
+				989CCF8C288FE82E0024AA17 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
