@@ -10,6 +10,7 @@ import UIKit
 class CollectionViewController: UIViewController {
 
     @IBOutlet private weak var collectionView: UICollectionView!
+    /// the viewModel for the collectionview
     private var viewModel: CollectionViewViewModel!
     
     override func viewDidLoad() {
@@ -22,6 +23,7 @@ class CollectionViewController: UIViewController {
     
         setupCollectionView()
     }
+    /// the initial setup of the collectionview
     func setupCollectionView(){
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -33,6 +35,7 @@ class CollectionViewController: UIViewController {
         }
     }
 
+    /// the handler for the pinch gesture
     @objc private func pinchGestureDetected(_ gesture: UIPinchGestureRecognizer){
         guard let cell = gesture.view as? UICollectionViewCell else {return}
         guard let index = collectionView.indexPath(for: cell) else {return}

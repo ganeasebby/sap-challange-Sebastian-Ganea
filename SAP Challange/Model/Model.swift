@@ -7,22 +7,22 @@
 
 import Foundation
 
-enum ModelType{
-    case label
-    case textView
-}
+struct BasicSAPModelTypes {
+     static let labelType = 1
+     static let textViewType = 2
+ }
 
 protocol SAPModel{
-    var type: ModelType { get }
+    var type: Int { get }
     var text: String? { get set }
 }
 
 struct LabelModel: SAPModel {
-    let type: ModelType = .label
+    let type  = BasicSAPModelTypes.labelType
     var text: String?
 }
 
 struct TextViewModel: SAPModel{
-    let type: ModelType = .textView
+    let type  = BasicSAPModelTypes.textViewType
     var text: String?
 }

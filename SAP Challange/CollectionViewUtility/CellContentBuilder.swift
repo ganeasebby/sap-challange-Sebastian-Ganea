@@ -8,18 +8,26 @@
 import Foundation
 import UIKit
 
-/// Used to for building the content of the collectionviewcells based on the model
-struct ContentBuilder{
+//protocol ContentBuilderProtocol {
+//    func build(_ model: SAPModel) throws -> UIView
+//}
+
+/// Used  for building the content of the collectionviewcells based on the model
+class ContentBuilder{
+    static var builder: ContentBuilder?
     
     /// builds the view that needs to be displayed by the cell based on the model
-    func build(_ model: SAPModel) -> UIView{
+    func build(_ model: SAPModel) throws -> UIView {
+        
         switch model.type{
             
-        case .label:
+        case BasicSAPModelTypes.labelType:
             return LabelContent(text: model.text)
             
-        case .textView:
+        case BasicSAPModelTypes.textViewType:
             return TextViewContent(text: model.text)
+        default:
+            throw SAPTypeError.unknownModelType("Unknown SAP Model Type")
         }
     }
 }

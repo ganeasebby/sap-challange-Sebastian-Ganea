@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// A datasource factory used for testing
 class TestDataSourceFactory: DataSourceProtocol{
     /// returns an array of model that is used to populate the collectionview. Since this is the test datasource factory it will return a dummy array
     func getData() -> [SAPModel]{

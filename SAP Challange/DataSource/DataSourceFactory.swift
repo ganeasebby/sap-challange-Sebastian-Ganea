@@ -11,6 +11,7 @@ protocol DataSourceProtocol {
     func getData() -> [SAPModel]
 }
 
+/// Used to get feed the data to the collection view
 class DataSourceFactory {
     /// current instance of datasource factory
     static var shared: DataSourceFactory?

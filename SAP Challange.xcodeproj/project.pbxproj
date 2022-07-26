@@ -34,6 +34,8 @@
 		989CCF7D288FE4290024AA17 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E44B4288542CF00D16752 /* CollectionViewController.swift */; };
 		989CCF85288FE82E0024AA17 /* SAP_ChallangeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989CCF84288FE82E0024AA17 /* SAP_ChallangeUITests.swift */; };
 		989CCF87288FE82E0024AA17 /* SAP_ChallangeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989CCF86288FE82E0024AA17 /* SAP_ChallangeUITestsLaunchTests.swift */; };
+		989CCF8E289010AB0024AA17 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989CCF8D289010AB0024AA17 /* Errors.swift */; };
+		989CCF9128901AF20024AA17 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989CCF8D289010AB0024AA17 /* Errors.swift */; };
 		989D996B288850AA00CE2EE0 /* SAP_ChallangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D996A288850AA00CE2EE0 /* SAP_ChallangeTests.swift */; };
 		989D9971288852C900CE2EE0 /* CollectionViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E44B8288574AA00D16752 /* CollectionViewViewModel.swift */; };
 		989D99722888555000CE2EE0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E44BA2885ABBD00D16752 /* Model.swift */; };
@@ -80,6 +82,7 @@
 		989CCF82288FE82E0024AA17 /* SAP ChallangeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SAP ChallangeUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		989CCF84288FE82E0024AA17 /* SAP_ChallangeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAP_ChallangeUITests.swift; sourceTree = "<group>"; };
 		989CCF86288FE82E0024AA17 /* SAP_ChallangeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAP_ChallangeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		989CCF8D289010AB0024AA17 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		989D9968288850AA00CE2EE0 /* SAP ChallangeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SAP ChallangeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		989D996A288850AA00CE2EE0 /* SAP_ChallangeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAP_ChallangeTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -146,6 +149,7 @@
 				988E44BC2885AC6800D16752 /* Model */,
 				988E44B32885428200D16752 /* CollectionView */,
 				9894B957288EEF1F002B2B57 /* CollectionViewUtility */,
+				989CCF8D289010AB0024AA17 /* Errors.swift */,
 				988E449F2885423300D16752 /* AppDelegate.swift */,
 				988E44A12885423300D16752 /* SceneDelegate.swift */,
 				988E44A32885423300D16752 /* ViewController.swift */,
@@ -343,6 +347,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				988E44BF2885ADD300D16752 /* CustomCollectionViewCellViewModel.swift in Sources */,
+				989CCF8E289010AB0024AA17 /* Errors.swift in Sources */,
 				986BE68D288AC95200DA53FC /* DataSourceFactory.swift in Sources */,
 				988E44B5288542CF00D16752 /* CollectionViewController.swift in Sources */,
 				988E44B9288574AA00D16752 /* CollectionViewViewModel.swift in Sources */,
@@ -379,6 +384,7 @@
 				985493AA288EE3DE00A0D17F /* TestDataSource.swift in Sources */,
 				989D99722888555000CE2EE0 /* Model.swift in Sources */,
 				989CCF7B288FCF640024AA17 /* TextViewContent.swift in Sources */,
+				989CCF9128901AF20024AA17 /* Errors.swift in Sources */,
 				989D996B288850AA00CE2EE0 /* SAP_ChallangeTests.swift in Sources */,
 				985493AD288EE3F600A0D17F /* ProductionDataSource.swift in Sources */,
 				989D9971288852C900CE2EE0 /* CollectionViewViewModel.swift in Sources */,

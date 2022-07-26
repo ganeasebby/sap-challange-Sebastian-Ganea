@@ -257,5 +257,14 @@ class SAP_ChallangeTests: XCTestCase {
         cell.prepareForReuse()
         XCTAssertEqual(cell.contentView.subviews, [])
     }
+    
+    func test(){
+//       let label = LabelModel(text: "dsds")
+//        let textview = TextViewModel(text: "ddddd")
+//        
+//        if label.self == LabelModel{
+//            
+//        }
+    }
 
 }

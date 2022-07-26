@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// the view model used by the collection view
 class CollectionViewViewModel {
     
     /// a struct used to layout the cells, Like size, or visual state of the item
